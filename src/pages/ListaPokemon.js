@@ -66,11 +66,11 @@ function ListaPokemon() {
         </div>
       ) : (
         <React.Fragment>
-          <div>
-            <button onClick={prev}>Regresar</button>
-            <button onClick={next}>Siguiente</button>
+          <div className="d-flex justify-content-around mb-3" >
+            <button onClick={prev} className="btn btn-secondary" >Regresar</button>
+            <button onClick={next} className="btn btn-primary" >Siguiente</button>
           </div>
-          <div className="row">
+          <div className="row justify-content-around">
             {pokemonData.map((pokemon, i) => (
               <CardPokemon key={i} pokemon={pokemon} />
             ))}

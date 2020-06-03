@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Form, Button, Card } from "react-bootstrap";
 
 export default function Buscar() {
   const [poke, setPoke] = useState({
-    pokemon: ""
+    pokemon: "",
   });
 
-  const [total, setTotal] = useState([])
-
+  const [total, setTotal] = useState([]);
+  
   const { pokemon } = poke;
 
   const LaApi = async () => {
-    let res = await fetch(`https://pokeapi.glitch.me/v1/pokemon/${pokemon}`);
+    const url = `https://pokeapi.glitch.me/v1/pokemon/${pokemon}`
+    const res = await fetch(url);
     let data = await res.json();
     console.log(data);
-    setTotal(data);
+    
+    if(data.error === 404){
+      alert(`no existe pokemon con ese nombre ${pokemon}`)
+    } else {
+      setTotal(data);
+    }
   };
 
   const cargarDatos = (ev) => {
@@ -52,24 +58,26 @@ export default function Buscar() {
       </Form>
 
       <div>
-        {total.map((ev)=> (
-          <Card key={ev.name}  style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={ev.sprite} />
-          <Card.Body>
-            <Card.Title> {ev.name} </Card.Title>
-             <Card.Text>{ev.description}</Card.Text>
-             <Card.Text>{ev.family.evolutionLine}</Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
+        {total.map((ev) => (
+          <Card key={ev.name} style={{ width: "18rem" }}>
+            <Card.Img variant="top" src={ev.sprite} />
+            <Card.Body>
+              <Card.Title> {ev.name} </Card.Title>
+              <Card.Text>{ev.description}</Card.Text>
+              <Card.Text className="text-center"  > N° {ev.number}</Card.Text>
+              <ul className="d-flex justify-content-around px-0" >
+                {ev.family.evolutionLine.map(e => (
+                  <button className="btn btn-danger" key={e}  > {e} </button>
+                ))}
+              </ul>
+              <Button block variant="primary">Mas detalles</Button>
+            </Card.Body>
+          </Card>
         ))}
       </div>
-
-      
     </div>
   );
 }
-
 
 
 
