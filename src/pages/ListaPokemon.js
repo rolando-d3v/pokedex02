@@ -1,59 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
-import { getAllPokemon, getPokemon } from "../services/pokemon";
+// import { getAllPokemon, getPokemon } from "../services/pokemon";
 import CardPokemon from "../components/CardPokemon";
 
 function ListaPokemon() {
   const [pokemonData, setPokemonData] = useState([]);
-  const [nextUrl, setNextUrl] = useState("");
-  const [prevUrl, setPrevtUrl] = useState("");
   const [loading, setLoading] = useState(true);
 
- const initialUrl = "https://pokeapi.co/api/v2/pokemon";
-  // const initialUrl = "https://pokeapi.glitch.me/v1/pokemon";
+//  const initialUrl = "https://pokeapi.co/api/v2/pokemon";
 
-  useEffect(() => {
-    async function fetchData() {
-      let response = await getAllPokemon(initialUrl);
-      setNextUrl(response.next);
-      setPrevtUrl(response.previous);
-      await loadingPokemon(response.results);
-      console.log(response.results);
+    
+
+useEffect(() => {
+  async function fetchData() {
+    const url = "https://api-pokemons.herokuapp.com/pokemons/";
+      const res = await fetch(url);
+      const data = await res.json()
+      setPokemonData(data)
       
+      console.log(data);
       setLoading(false);
     }
     fetchData();
   }, []);
 
-  const next = async () => {
-    setLoading(true);
-    let data = await getAllPokemon(nextUrl);
-    await loadingPokemon(data.results);
-    setNextUrl(data.next);
-    setPrevtUrl(data.previous);
-    setLoading(false);
-  };
 
-  const prev = async () => {
-    if (!prevUrl) return;
-    setLoading(true);
-    let data = await getAllPokemon(prevUrl);
-    await loadingPokemon(data.results);
-    setNextUrl(data.next);
-    setPrevtUrl(data.previous);
-    setLoading(false);
-  };
-
-  const loadingPokemon = async (data) => {
-    let _pokemonData = await Promise.all(
-      data.map(async (pokemon) => {
-        let pokemonRecord = await getPokemon(pokemon.url);
-        return pokemonRecord;
-      })
-    );
-    setPokemonData(_pokemonData);
-  };
-  console.log(pokemonData);
 
   return (
     <div className="App">
@@ -66,10 +37,6 @@ function ListaPokemon() {
         </div>
       ) : (
         <React.Fragment>
-          <div className="d-flex justify-content-around mb-3" >
-            <button onClick={prev} className="btn btn-secondary" >Regresar</button>
-            <button onClick={next} className="btn btn-primary" >Siguiente</button>
-          </div>
           <div className="row justify-content-around">
             {pokemonData.map((pokemon, i) => (
               <CardPokemon key={i} pokemon={pokemon} />

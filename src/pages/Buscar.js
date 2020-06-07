@@ -10,18 +10,21 @@ export default function Buscar() {
   
   const { pokemon } = poke;
 
+
   const LaApi = async () => {
     const url = `https://pokeapi.glitch.me/v1/pokemon/${pokemon}`
     const res = await fetch(url);
     let data = await res.json();
     console.log(data);
-    
+
     if(data.error === 404){
       alert(`no existe pokemon con ese nombre ${pokemon}`)
     } else {
       setTotal(data);
     }
   };
+
+
 
   const cargarDatos = (ev) => {
     setPoke({

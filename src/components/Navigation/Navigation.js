@@ -10,6 +10,7 @@ export default function Navigation() {
             <Link to="/" className="nav-link" > Home </Link>
             <Link to="/listapokemon" className="nav-link" > Lista de Pokemons </Link>
             <Link to="/buscar" className="nav-link" > Buscar</Link>
+            <Link to="/buscarpokemon" className="nav-link" > Buscar Poke</Link>
         </Nav>
       </Navbar>
     )

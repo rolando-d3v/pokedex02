@@ -1,0 +1,103 @@
+.card-pokemon {
+  font-family: "Poppins", sans-serif;
+  border-radius: 30px;
+  text-align: start;
+  border-left: 5px solid gray;
+  height: 420px;
+  // transition: 1s;
+
+  .card-body{
+    padding: 20px 15px 5px 15px;
+    margin-bottom: 0;
+  }
+  
+  .card-img-top {
+    position: absolute;
+    bottom: 240px;
+    left: 150px;
+    z-index: 0;
+    transition: 0.4s;
+  }
+
+
+  &:hover {
+    border-left: 5px solid black;
+    transform: scale(1.05);
+    z-index: 2;
+
+    .card-img-top {
+       width: 250px !important;
+    }
+  }
+  
+  .text-uppercase {
+    font-size: 22px;
+    color: #ffffff;
+    text-shadow:  4px -1px 4px #000000;
+  }
+
+  p {
+    color: #fff;
+    text-shadow: 1px -1px 5px black;
+  }
+
+  .tipo-pokemon {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+
+
+    button {
+      padding: 2px 18px;
+      border-radius: 30px;
+      border-color: #000;
+    }
+  }
+
+  .name-evolution {
+    font-size: 15px;
+    text-align: center;
+  }
+
+}
+
+
+
+
+
+
+
+
+// .card-pokemon {
+//   font-family: "Poppins", sans-serif;
+//   border-radius: 50px;
+//   text-align: start;
+//   border-left: 5px solid gray;
+
+//   .text-uppercase {
+//     font-size: 22px;
+//     &:hover {
+//       color: blue;
+//     }
+//   }
+
+//   .card-img-top {
+//     position: absolute;
+//     bottom: 210px;
+//     left: 150px;
+//     z-index: 1;
+//   }
+
+//   &:hover {
+//     border-left: 5px solid black;
+
+//     .text-uppercase {
+//       color: blue;
+//     }
+
+//     .card-img-top {
+//       width: 280px !important;
+//       zoom: 1;
+//     }
+//   }
+// }
